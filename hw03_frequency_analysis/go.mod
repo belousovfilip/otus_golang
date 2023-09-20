@@ -1,4 +1,4 @@
-module github.com/fixme_my_friend/hw03_frequency_analysis
+module github.com/belousovfilip/otus_golang/hw01_hello_otus
 
 go 1.19
 

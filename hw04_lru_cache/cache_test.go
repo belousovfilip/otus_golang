@@ -10,6 +10,24 @@ import (
 )
 
 func TestCache(t *testing.T) {
+	t.Run("crowding out", func(t *testing.T) {
+		c := NewCache(1)
+		c.Set("aaa1", 100)
+		c.Set("aaa2", 200)
+		c.Set("aaa3", 300)
+
+		val, ok := c.Get("aaa1")
+		require.Nil(t, val)
+		require.False(t, ok)
+
+		val, ok = c.Get("aaa2")
+		require.Nil(t, val)
+		require.False(t, ok)
+
+		val, ok = c.Get("aaa3")
+		require.True(t, ok)
+		require.Equal(t, 300, val)
+	})
 	t.Run("empty cache", func(t *testing.T) {
 		c := NewCache(10)
 
@@ -50,7 +68,12 @@ func TestCache(t *testing.T) {
 	})
 
 	t.Run("purge logic", func(t *testing.T) {
-		// Write me
+		c := NewCache(5)
+		c.Set("aaa", 100)
+		c.Set("bbb", 200)
+		c.Clear()
+		v, _ := c.Get("aaa")
+		require.Nil(t, v)
 	})
 }
 

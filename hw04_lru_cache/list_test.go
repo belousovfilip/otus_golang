@@ -67,7 +67,7 @@ func TestList(t *testing.T) {
 		require.Equal(t, []int{30, 20, 10}, convertListToReverseSlice(l))
 	})
 
-	t.Run("Len", func(t *testing.T) {
+	t.Run("Max", func(t *testing.T) {
 		l := NewList()
 		require.Equal(t, 0, l.Len())
 
